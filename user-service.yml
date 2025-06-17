@@ -1,10 +1,25 @@
 server:
   port: 0
 
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_db
+    username: myuser
+    password: fialka
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: user_management
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: user_management
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
-test-property:
-  value: "Hello from User Service config read from Git!"
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
