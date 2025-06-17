@@ -1,0 +1,27 @@
+server:
+  port: 0
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog_db
+    username: myuser
+    password: fialka
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: catalog_management
+  flyway:
+    enabled: true
+    schemas: catalog_management
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+example-property:
+  message: "Hello from Catalog Service config!"
